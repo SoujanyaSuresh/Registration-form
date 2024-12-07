@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    /* Gradient Background */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      animation: backgroundMove 10s infinite alternate;
+      color: #ffffff;
+    }
+
+    @keyframes backgroundMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Card Layout */
+    .container {
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-size: 16px;
+      color: #666;
+      text-align: left;
+    }
+
+    input, select, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      background: #f7f7f7;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #6a11cb;
+      box-shadow: 0px 5px 15px rgba(106, 17, 203, 0.3);
+    }
+
+    button {
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+      color: white;
+      font-weight: bold;
+      font-size: 17px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 8px 20px rgba(106, 17, 203, 0.5);
+    }
+
+    /* Response Box */
+    #response {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef2ff;
+      color: #333;
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+      display: none;
+      text-align: left;
+    }
+
+    #response h2 {
+      margin: 0 0 15px 0;
+      color: #2575fc;
+    }
+
+    #response p {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Register Now</h1>
+    <form id="registrationForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" placeholder="Enter your age" required>
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="" disabled selected>Select your gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" placeholder="Enter your address" rows="3" required></textarea>
+
+      <button type="button" id="submitButton">Submit</button>
+    </form>
+
+    <div id="response"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#submitButton').click(function () {
+        // Collect form data
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var age = $('#age').val();
+        var gender = $('#gender').val();
+        var address = $('#address').val();
+
+        // Validate inputs
+        if (!name || !email || !age || !gender || !address) {
+          alert('Please fill out all fields!');
+          return;
+        }
+
+        // Format response message
+        var responseHtml = `
+          <h2>Registration Complete</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Age:</strong> ${age}</p>
+          <p><strong>Gender:</strong> ${gender}</p>
+          <p><strong>Address:</strong> ${address}</p>
+        `;
+
+        // Display the response
+        $('#response').html(responseHtml).fadeIn();
+      });
+    });
+  </script>
+</body>
+</html>
